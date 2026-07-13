@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Rosita Candles — Portfolio</title>
+
+<!-- Google Fonts: Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- External Styles -->
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Locked 1080x1920 canvas. Absolute positioned per scaling rules. Math-based scaling handled later in JS. -->
+  <div id="canvas" class="canvas">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="header">
+      <div class="brand">
+        <span class="brand-name">Rosita Candles</span>
+        <span class="brand-sub">Portfolio</span>
+      </div>
+      <div class="avatar" aria-label="Profile avatar placeholder"></div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="hero-label">Total Portfolio Value</div>
+      <div class="hero-value">
+        <span class="hero-currency">$</span><span id="heroValue" class="hero-number">15,901.95</span>
+      </div>
+      <div class="badge-return" id="badgeReturn">
+        <span class="badge-arrow">▲</span>
+        <span id="badgeReturnValue">+47.53%</span>
+        <span class="badge-sub">Today</span>
+      </div>
+    </section>
+
+    <!-- ===================== CHART ===================== -->
+    <section class="chart-section">
+      <div class="chart-container" id="chartContainer">
+
+        <!-- Watermark: must stay dead center via absolute inset + flex centering -->
+        <div class="chart-watermark">
+          <span>Rosita</span>
+        </div>
+
+        <!-- SVG must have explicit width/height attributes to avoid Safari collapse -->
+        <svg
+          id="chartSvg"
+          class="chart-svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 1080 640"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Smooth thick line curve path injected/animated via app.js -->
+          <path id="chartPath" class="chart-path" d="" fill="none" />
+          <!-- Optional leading point marker, positioned via JS -->
+          <circle id="chartDot" class="chart-dot" r="10" cx="0" cy="0"></circle>
+        </svg>
+
+      </div>
+
+      <!-- Axis labels row (shorthand currency, e.g. $1.5k) populated via app.js -->
+      <div class="chart-axis" id="chartAxis"></div>
+    </section>
+
+    <!-- ===================== ASSET LIST ===================== -->
+    <section class="assets" id="assets">
+
+      <div class="asset-card">
+        <div class="asset-info">
+          <div class="asset-icon aapl">A</div>
+          <div class="asset-text">
+            <span class="asset-symbol">AAPL</span>
+            <span class="asset-name">Apple Inc.</span>
+          </div>
+        </div>
+        <div class="asset-values">
+          <span class="asset-price">$212.44</span>
+          <span class="asset-change positive">+1.82%</span>
+        </div>
+      </div>
+
+      <div class="asset-card">
+        <div class="asset-info">
+          <div class="asset-icon tsla">T</div>
+          <div class="asset-text">
+            <span class="asset-symbol">TSLA</span>
+            <span class="asset-name">Tesla Inc.</span>
+          </div>
+        </div>
+        <div class="asset-values">
+          <span class="asset-price">$318.07</span>
+          <span class="asset-change positive">+3.14%</span>
+        </div>
+      </div>
+
+      <div class="asset-card">
+        <div class="asset-info">
+          <div class="asset-icon msft">M</div>
+          <div class="asset-text">
+            <span class="asset-symbol">MSFT</span>
+            <span class="asset-name">Microsoft Corp.</span>
+          </div>
+        </div>
+        <div class="asset-values">
+          <span class="asset-price">$487.90</span>
+          <span class="asset-change negative">-0.64%</span>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- External Script -->
+  <script src="app.js"></script>
+</body>
+</html>
