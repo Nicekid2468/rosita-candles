@@ -1,0 +1,306 @@
+/* =========================================================
+   Rosita Candles — Clean Retail App
+   Vertical 1080x1920 canvas, Puppeteer video capture build
+   ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #F0F1F3;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   CANVAS LOCK — never use flex/grid/zoom to center this.
+   Scaling for mobile preview is handled mathematically in JS.
+   ========================================================= */
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #F0F1F3;
+  color: #1A1A1E;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 56px 0 56px;
+  height: 128px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brand-name {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1A1A1E;
+}
+
+.brand-sub {
+  font-size: 26px;
+  font-weight: 500;
+  color: #8A8D93;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #E9EAEC;
+  box-shadow: 0 8px 20px rgba(20, 20, 30, 0.06);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 56px 56px 40px 56px;
+}
+
+.hero-label {
+  font-size: 32px;
+  font-weight: 600;
+  color: #8A8D93;
+  margin-bottom: 20px;
+}
+
+.hero-value {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1;
+}
+
+.hero-currency {
+  font-size: 64px;
+  font-weight: 800;
+  color: #1A1A1E;
+  margin-top: 14px;
+}
+
+.hero-number {
+  font-size: 140px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #1A1A1E;
+}
+
+.badge-return {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  border-radius: 40px;
+  background: rgba(0, 200, 5, 0.10);
+  box-shadow: 0 6px 18px rgba(0, 200, 5, 0.08);
+}
+
+.badge-arrow {
+  font-size: 24px;
+  color: #00C805;
+}
+
+#badgeReturnValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #00C805;
+}
+
+.badge-sub {
+  font-size: 26px;
+  font-weight: 500;
+  color: #4E9E52;
+  opacity: 0.8;
+}
+
+/* =========================================================
+   CHART
+   ========================================================= */
+.chart-section {
+  padding: 24px 48px 0 48px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  border-radius: 40px;
+  background: #FFFFFF;
+  border: 1px solid rgba(20, 20, 30, 0.06);
+  box-shadow: 0 28px 70px rgba(20, 20, 30, 0.10), 0 4px 12px rgba(20, 20, 30, 0.04);
+  overflow: hidden;
+}
+
+/* SVG must be explicit width/height to prevent Safari collapse */
+.chart-svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+}
+
+.chart-path {
+  stroke: #00C805;
+  stroke-width: 10px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.chart-dot {
+  fill: #00C805;
+  stroke: #FFFFFF;
+  stroke-width: 6px;
+  filter: drop-shadow(0 4px 10px rgba(0, 200, 5, 0.35));
+}
+
+/* Watermark — must stay dead center regardless of SVG viewBox */
+.chart-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.chart-watermark span {
+  font-size: 96px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #1A1A1E;
+  opacity: 0.04;
+}
+
+.chart-axis {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 16px 0 16px;
+  font-size: 26px;
+  font-weight: 500;
+  color: #B4B7BD;
+}
+
+/* =========================================================
+   ASSET LIST
+   ========================================================= */
+.assets {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 56px 48px 64px 48px;
+}
+
+.asset-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 36px;
+  border-radius: 32px;
+  background: #FFFFFF;
+  box-shadow: 0 12px 30px rgba(20, 20, 30, 0.05);
+}
+
+.asset-info {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.asset-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.asset-icon.aapl {
+  background: #1A1A1E;
+}
+
+.asset-icon.tsla {
+  background: #E31937;
+}
+
+.asset-icon.msft {
+  background: #00A4EF;
+}
+
+.asset-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.asset-symbol {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1A1A1E;
+}
+
+.asset-name {
+  font-size: 26px;
+  font-weight: 500;
+  color: #8A8D93;
+}
+
+.asset-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.asset-price {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1A1A1E;
+}
+
+.asset-change {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.asset-change.positive {
+  color: #00C805;
+}
+
+.asset-change.negative {
+  color: #FF5000;
+}
